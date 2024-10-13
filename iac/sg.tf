@@ -1,7 +1,7 @@
 resource "aws_security_group" "posweb_myapp_2024_sg" {
   name        = "posweb_myapp_2024"
   description = "Allow MyAPP inbound traffic and all outbound traffic"
-  vpc_id      = aws_default_vpc.default.id
+  vpc_id      = aws_vpc.myapp_vpc.id # Atualizado para a nova VPC
 
   tags = {
     Name = "posweb_myapp_2024_sg"
@@ -39,7 +39,6 @@ resource "aws_vpc_security_group_ingress_rule" "posweb_myapp_2024_allow_api2" {
   ip_protocol       = "tcp"
   to_port           = 5001
 }
-
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   security_group_id = aws_security_group.posweb_myapp_2024_sg.id
